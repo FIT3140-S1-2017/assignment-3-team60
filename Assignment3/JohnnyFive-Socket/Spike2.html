@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>  
+<head>
+  <meta charset = "UTF-8">    
+  <title>IOT CONTROL PANEL</title>
+</head>  
+<body style="background-color:  #6495ED">  
+    <!-- <script src="socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>  
+    <script>
+        var socket = io();
+        function motionon(){
+            alert("Motion Sensor On");
+            socket.emit('sensor:on');
+            socket.on('start:motion', function(data){
+                alert("Data Received");
+                var displayTimeStamp=document.getElementById("Time")
+                var displayResponseTime= document.getElementById("Response");
+                var displayStatus = document.getElementById("Status")
+            });
+            socket.on('end:motion', function(data){
+                var displayStatus = document.getElementById("Status")
+            });
+        }
+    </script>
+    <header>
+        <h1  style="background-color: #1890E5; color: white; text-align: center; padding: 10px">IOT CONTROL PANEL</h1>
+    </header>
+    
+<aside style="text-align: center">
+
+    <h2 style="text-align: center; font-size: 200%">Control Panel</h2>
+    <div style=" background-color:#FFFFFF ;margin: auto; width: 30%; border: 3px solid black; padding: 30px">
+
+        <h4 style="font-size: 200%; position:relative; top:-50px">Motion Controller</h4>
+    
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionon()">On</button>
+    
+        <h4 style="font-size: 200%; position:relative; top:-50px">Motion Status</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Status"></h5>
+        <h4 style="font-size: 200%; position:relative; top:-50px">TimeStamp</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Time"></h5>
+        <h4 style="font-size: 200%; position:relative; top:-50px">Response Time</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Response"></h5>
+
+    </div>
+    
+</aside>
+</body>
+</html>
+
