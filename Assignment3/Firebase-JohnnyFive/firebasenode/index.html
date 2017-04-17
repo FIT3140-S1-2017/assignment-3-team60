@@ -24,9 +24,20 @@
     <script>
         var database = firebase.database();
         function motionon(){
-            firebase.database().ref('Motion').update({status:'on'});
+            var Motiondata= database.ref('Motion');
+            Motiondata.update({status:'on'});
+            Motiondata.on('child_added',function(snapshot){
+                var Clienttime = new Date();
+                
+                var displayTimeStamp=document.getElementById("Time") 
+                var displayResponseTime= document.getElementById("Response");
 
-            }
+                displayTimeStamp.innerHTML=snapshot.val().timestamp+ " Millisecond"
+                displayResponseTime.innerHTML=(Clienttime.getMilliseconds()-snapshot.val().ResponseMS)/1000 +" Seconds"
+                var displayStatus = document.getElementById("Status")
+                displayStatus.innerHTML = snapshot.val().type;
+            });
+        }
 
     </script>
 

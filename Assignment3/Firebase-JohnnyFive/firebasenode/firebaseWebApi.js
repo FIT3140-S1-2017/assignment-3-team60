@@ -39,21 +39,7 @@ function Fit3140() {
       console.error('Error writing new message to Firebase Database', error);
     });
   };
-
-  Fit3140.prototype.displayMessage = function (Timestamp,ResponseMS, type) {
-          var Clienttime = new Date();
-
-          var displayTimeStamp=document.getElementById("Time") 
-          var displayResponseTime= document.getElementById("Response");
-
-          displayTimeStamp.innerHTML=TimeStamp + " Millisecond"
-          displayResponseTime.innerHTML=(Clienttime.getMilliseconds()-ResponseMS)/1000 +" Seconds"
-          
-          var displayStatus = document.getElementById("Status")
-          displayStatus.innerHTML = type;
-  };
-
-
+  
   // Checks that the Firebase SDK has been correctly setup and configured.
   Fit3140.prototype.checkSetup = function () {
     if (!window.firebase || !(firebase.app instanceof Function) || !window.config) {

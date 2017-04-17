@@ -34,43 +34,28 @@ motiondb.on("value", function(snapshot) {   //this callback will be invoked with
 	if (motioncounter === 0){
 		motioncounter++
 		if (datamotion !== 'null'){
-			motiondb.update({type:'Disconnected',status: 'off', timestamp:0, ResponseMS:0});
+			motiondb.update({type:'Disconnected',status: 'off',timestamp:0,ResponseMS:0});
 		}else{
-			motiondb.push({type:'Disconnected', status: 'off',timestamp:0, ResponseMS:0});
+			motiondb.push({type:'Disconnected', status: 'off',timestamp:0,ResponseMS:0});
 		}
-	}else{		
-		if (snapshot.val().status=== 'on'){
-			if(once===0){
+	}else{
+		if (snapshot.val().status =='on'){
+			if (once===0){
 				motion.on("motionstart", function(){
-					var Starttime = new Date();
 					console.log("Motion started");
-					console.log("Current Time is "+ Starttime.getHours() + ":"+ 
-					Starttime.getMinutes() + ":"+ Starttime.getSeconds());
-					motiondb.push({type: 'Connected', Timestamp:Starttime.getTime(),ResponseMS:Starttime.getMilliseconds()});
-
+					var Starttime = new Date();
+					motiondb.push({type:'Connected', timestamp:Starttime.getTime(),ResponseMS:Starttime.getMilliseconds()});
+					console.log("The timestamp is "	+ Starttime.getTime() + " milliseconds");
 				});
-			}else{
-				var Starttime = new Date();
-				console.log("Motion started");
-				console.log("Current Time is "+ Starttime.getHours() + ":"+ 
-				Starttime.getMinutes() + ":"+ Starttime.getSeconds());
-				motiondb.push({type: 'Connected', Timestamp:Starttime.getTime(),ResponseMS:Starttime.getMilliseconds()});
-
 			}
 			if (once===0){
 				once++;
 				motion.on("motionend", function(){
 					console.log("Motion end" +"\n");
-					motiondb.push({type:'Disconnected', status: 'on',timestamp:0, ResponseMS:0});
-			});
-			
-			}else{
-				console.log("Motion end" +"\n");
-				motiondb.push({type:'Disconnected', status: 'on',timestamp:0, ResponseMS:0});
-
-				}
+					motiondb.({type:'Disconnected'});
+				});
+			}
 		}
 	}
-}, function (errorObject) {             // if error
-  console.log("The read failed: " + errorObject.code);
 });
+				
