@@ -11,19 +11,20 @@
         function motionon(){
             alert("Motion Sensor On");
             socket.emit('sensor:on');
+            var displayTimeStamp=document.getElementById("Time")
+            var displayResponseTime= document.getElementById("Response");
+            var displayStatus = document.getElementById("Status");
             socket.on('start:motion', function(data){
-                var Clienttime = new Date().getTime();
-                var displayTimeStamp=document.getElementById("Time")
-                var displayResponseTime= document.getElementById("Response");
-                displayTimeStamp.innerHTML=data.TimeStamp + " Millisecond"
-                displayResponseTime.innerHTML=(Clienttime-data.TimeStamp)/1000 +" Seconds"
-                var displayStatus = document.getElementById("Status")
                 displayStatus.innerHTML = data.motionstatus;
+
             });
             socket.on('end:motion', function(data){
-                var displayStatus = document.getElementById("Status")
+                var clienttime = new Date().getTime();
                 displayStatus.innerHTML = data.motionstatus;
+                displayTimeStamp.innerHTML=data.timeStamp + " Millisecond"
+                displayResponseTime.innerHTML=(clienttime-data.timeStamp)/1000 +" Seconds"
             });
+
         }
     </script>
     <header>
@@ -40,11 +41,11 @@
         <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionon()">On</button>
     
         <h4 style="font-size: 200%; position:relative; top:-50px">Motion Status</h4>
-        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Status"></h5>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Status">0</h5>
         <h4 style="font-size: 200%; position:relative; top:-50px">TimeStamp</h4>
-        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Time"></h5>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Time">0</h5>
         <h4 style="font-size: 200%; position:relative; top:-50px">Response Time</h4>
-        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Response"></h5>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="Response">0</h5>
 
     </div>
     
