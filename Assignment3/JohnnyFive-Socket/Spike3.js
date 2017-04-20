@@ -25,14 +25,14 @@ var disconnect= "Motion Disconnected";
 io.on('connection', function(socket){
 		socket.on('sensor:on', function(data){
 			motion.on("motionstart", function() {
-				var Starttime = new Date();
 				console.log("Motion started");
-				console.log("The timestamp is "	+ Starttime.getTime() + " milliseconds");
-				socket.emit('start:motion', {motionstatus: connect,TimeStamp: Starttime.getTime()});
+				socket.emit('start:motion', {motionstatus:connect});
 			});
 			motion.on("motionend", function() {
 				console.log("Motion end" +"\n");
-				socket.emit('end:motion', {motionstatus: disconnect});
+				var starttime = new Date().getTime();
+				console.log("The timestamp is "	+ starttime + " milliseconds");
+				socket.emit('end:motion', {motionstatus:disconnect, timeStamp:starttime});
 			});
 		});
 	});
