@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>  
+<head>
+  <meta charset = "UTF-8">    
+  <title>IOT CONTROL PANEL</title>
+</head>  
+<body>  
+    <!-- <script src="socket.io.js"></script> -->
+    <!--script src="/socket.io/socket.io.js"></script-->
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyDnkWembhualV16RMovdWLtuURRrEiBa4A",
+        authDomain: "project1-cb101.firebaseapp.com",
+        databaseURL: "https://project1-cb101.firebaseio.com",
+        storageBucket: "project1-cb101.appspot.com",
+        messagingSenderId: "627027294252"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!--End-->
+    <script src="./firebaseWebApi.js"></script>
+    <script>
+        var database = firebase.databse();
+
+        function motionon(){
+            firebase.database().ref('Motion').update({type:'ON'});
+            alert('Motion Connected')
+        }
+        
+    </script>
+
+    <header>
+        <h1  style="background-color: #1890E5; color: white; text-align: center; padding: 10px">IOT CONTROL PANEL</h1>
+    </header>
+    
+<aside style="text-align: center">
+
+    <h2 style="text-align: center; font-size: 200%">Control Panel</h2>
+    <div style="margin: auto; width: 30%; border: 3px solid black; padding: 30px">
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Motion Controller</h4>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionon()">On</button>
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Status</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="total">0</h5>
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">TimeStamp</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="long">0</h5>
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Response Time</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="short">0</h5>
+
+    </div>
+    
+</aside>
+</body>
+</html>
