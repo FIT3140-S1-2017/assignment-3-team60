@@ -23,8 +23,8 @@ var serialport = new SerialPort("/dev/ttyACM0",{
 serialport.on('open', function(){
   console.log('Serial Port Opened');
   serialport.on('data', function(data){
-      console.log(data);
-      var starttime = new Date().getTime();
+      console.log(data);                            //print only motion has ended
+      var starttime = new Date().getTime();         //pass data to client
       io.sockets.emit('end:motion', {motionstatus:disconnect, timeStamp:starttime});
   });
 });
