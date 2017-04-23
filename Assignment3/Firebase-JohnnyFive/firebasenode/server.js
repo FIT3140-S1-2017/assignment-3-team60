@@ -31,9 +31,9 @@ var motiondb = db.ref("/Motion");
 
 
 
-var total;
-var longmotion;
-var shortmotion;
+var total;				//total variable as status
+var longmotion;				//longmotion variable as timestamp
+var shortmotion;			//shortmotion variable as responsetime(server time)
 
 sensordb.push({totaldata:"Disconnected", longdata:0, shortdata:0});
 sensordb.on("value", function(snapshot) {   //this callback will be invoked with each new object
