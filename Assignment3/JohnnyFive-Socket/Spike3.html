@@ -15,11 +15,11 @@
             var displayResponseTime= document.getElementById("Response");
             var displayStatus = document.getElementById("Status");
             socket.on('start:motion', function(data){
-                displayStatus.innerHTML = data.motionstatus;
+                displayStatus.innerHTML = data.motionstatus;    //update motion sensor status
 
             });
             socket.on('end:motion', function(data){
-                var clienttime = new Date().getTime();
+                var clienttime = new Date().getTime();     //update motion sensor status, server's timestamp and reponse time
                 displayStatus.innerHTML = data.motionstatus;
                 displayTimeStamp.innerHTML=data.timeStamp + " Millisecond"
                 displayResponseTime.innerHTML=(clienttime-data.timeStamp)/1000 +" Seconds"
