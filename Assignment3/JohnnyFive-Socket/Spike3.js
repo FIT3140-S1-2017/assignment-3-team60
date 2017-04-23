@@ -25,12 +25,12 @@ var disconnect= "Motion Disconnected";
 io.on('connection', function(socket){
 		socket.on('sensor:on', function(data){
 			motion.on("motionstart", function() {
-				console.log("Motion started");
+				console.log("Motion started");			//send data to client when there is a motion
 				socket.emit('start:motion', {motionstatus:connect});
 			});
 			motion.on("motionend", function() {
-				console.log("Motion end" +"\n");
-				var starttime = new Date().getTime();
+				console.log("Motion end" +"\n");		//send data to client when motion ends
+				var starttime = new Date().getTime();		//server time
 				console.log("The timestamp is "	+ starttime + " milliseconds");
 				socket.emit('end:motion', {motionstatus:disconnect, timeStamp:starttime});
 			});
